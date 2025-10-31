@@ -1,3 +1,8 @@
+import os
+
+def limpiar_pantalla():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 class CuatroEnRaya:
     """
     Esta clase contiene una simulación de la reglas del juego cuatro en raya.
@@ -198,12 +203,15 @@ def juego_cuatro_en_raya():
             col = int(input(mensajes["columna_turno"]))
         except ValueError:
             print(mensajes["error_insercion"])
+            limpiar_pantalla()
             continue
         exito, opcion = juego.introducir_fichas(col, turno)
         if not exito:
             print(mensajes[opcion].format(columna = col))
+            limpiar_pantalla()
             continue
         else:
+            limpiar_pantalla()
             contador_de_intentos+=1
             if juego.revisar_ganador(turno):
                 print(mensajes["ganador"].format(turno = turno))
